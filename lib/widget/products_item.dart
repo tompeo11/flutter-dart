@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/entity/cart.dart';
 import 'package:provider/provider.dart';
 import '../entity/Product.dart';
-import '../screen/products_detail_screen.dart';
+import '../entity/cart.dart';
+import '../screen/product_detail_screen.dart';
 
 class ProductsItem extends StatelessWidget {
   const ProductsItem({super.key});
@@ -16,7 +16,7 @@ class ProductsItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: GestureDetector(
           onTap: () => Navigator.of(context)
-              .pushNamed(ProductsDetailScreen.routeName, arguments: product.id),
+              .pushNamed(ProductDetailScreen.routeName, arguments: product.id),
           child: GridTile(
             header: GridTileBar(
               title: Text(
@@ -41,24 +41,25 @@ class ProductsItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                icon: const Icon(
-                  Icons.shopping_cart,
-                ),
-                color: Theme.of(context).colorScheme.primary,
-                onPressed: () => {
-                  cart.addItem(product.id, product.unitPrice, product.name),
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar(),
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: const Text('Add item to cart'),
-                      duration: const Duration(seconds: 2),
-                      action: SnackBarAction(label: 'UNDO', onPressed: () {
-                        cart.removeSingleItem(product.id);
-                      },),
-                    )
-                  )
-                }
-              ),
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                  ),
+                  color: Theme.of(context).colorScheme.primary,
+                  onPressed: () => {
+                        cart.addItem(
+                            product.id, product.unitPrice, product.name),
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text('Add item to cart'),
+                          duration: const Duration(seconds: 2),
+                          action: SnackBarAction(
+                            label: 'UNDO',
+                            onPressed: () {
+                              cart.removeSingleItem(product.id);
+                            },
+                          ),
+                        ))
+                      }),
             ),
             child: Image.network(product.imageUrl, fit: BoxFit.fill),
           ),

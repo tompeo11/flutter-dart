@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/entity/cart.dart';
 import 'package:my_app/entity/order.dart';
-import 'package:my_app/provider/products_provider.dart';
+import 'package:my_app/provider/product_provider.dart';
 import 'package:my_app/screen/admin_product_screen.dart';
 import 'package:my_app/screen/admin_product_edit_screen.dart';
 import 'package:my_app/screen/cart_screen.dart';
 import 'package:my_app/screen/order_screen.dart';
-import 'package:my_app/screen/products_detail_screen.dart';
+import 'package:my_app/screen/product_detail_screen.dart';
 import 'package:my_app/screen/products_overview_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => ProductsProvider()),
+        ChangeNotifierProvider(create: (ctx) => ProductProvider()),
         ChangeNotifierProvider(create: (ctx) => Cart()),
         ChangeNotifierProvider(create: (ctx) => Orders()),
       ],
@@ -36,11 +36,12 @@ class MyApp extends StatelessWidget {
         ),
         home: const ProductsOverviewScreen(),
         routes: {
-          ProductsDetailScreen.routeName: (ctx) => const ProductsDetailScreen(),
-          CartScreen.routName: (ctx) => const CartScreen(),
-          OrderScreen.routName: (ctx) => const OrderScreen(),
-          AdminProductScreen.routName: (ctx) => const AdminProductScreen(),
-          AdminProductEditScreen.routeName: (ctx) => const AdminProductEditScreen(),
+          ProductDetailScreen.routeName: (ctx) => const ProductDetailScreen(),
+          CartScreen.routeName: (ctx) => const CartScreen(),
+          OrderScreen.routeName: (ctx) => const OrderScreen(),
+          AdminProductScreen.routeName: (ctx) => const AdminProductScreen(),
+          AdminProductEditScreen.routeName: (ctx) =>
+              const AdminProductEditScreen(),
         },
       ),
     );

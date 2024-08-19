@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/product_provider.dart';
+import '../screen/admin_product_edit_screen.dart';
 
 class AdminProductItemWidget extends StatelessWidget {
+  final int id;
   final String title;
   final String imageUrl;
 
-  const AdminProductItemWidget(this.title, this.imageUrl, {super.key});
+  const AdminProductItemWidget(this.id, this.title, this.imageUrl, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +22,12 @@ class AdminProductItemWidget extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.edit),
             color: Theme.of(context).primaryColor,
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).pushNamed(AdminProductEditScreen.routeName, arguments: id),
           ),
           IconButton(
             icon: const Icon(Icons.delete),
             color: Theme.of(context).errorColor,
-            onPressed: () {},
+            onPressed: () => context.read<ProductProvider>().deleteProduct(id),
           ),
         ],),
       ),
