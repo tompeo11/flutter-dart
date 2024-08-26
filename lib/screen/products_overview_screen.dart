@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:my_app/provider/product_provider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -16,6 +15,8 @@ enum FilterOptions {
 }
 
 class ProductsOverviewScreen extends StatefulWidget {
+  static const routName = "product-overview";
+
   const ProductsOverviewScreen({super.key});
 
   @override
@@ -23,6 +24,12 @@ class ProductsOverviewScreen extends StatefulWidget {
 }
 
 class _ProductsOverviewScreen extends State<ProductsOverviewScreen> {
+  @override
+  void didChangeDependencies() {
+    context.watch<ProductProvider>().fetchAndSetProducts().then((value) => null);
+    super.didChangeDependencies();
+  }
+
   bool _showFavoritesOnly = false;
 
   @override
@@ -63,7 +70,10 @@ class _ProductsOverviewScreen extends State<ProductsOverviewScreen> {
         ],
       ),
       drawer: const NavbarDrawer(),
-      body: ProductsGrid(_showFavoritesOnly),
+      body: RefreshIndicator(
+        child: ProductsGrid(_showFavoritesOnly),
+        onRefresh: () async => await context.read<ProductProvider>().fetchAndSetProducts(),
+      )
     );
   }
 }

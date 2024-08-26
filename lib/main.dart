@@ -4,6 +4,7 @@ import 'package:my_app/entity/order.dart';
 import 'package:my_app/provider/product_provider.dart';
 import 'package:my_app/screen/admin_product_screen.dart';
 import 'package:my_app/screen/admin_product_edit_screen.dart';
+import 'package:my_app/screen/auth_screen.dart';
 import 'package:my_app/screen/cart_screen.dart';
 import 'package:my_app/screen/order_screen.dart';
 import 'package:my_app/screen/product_detail_screen.dart';
@@ -34,14 +35,14 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.lightGreen,
           ),
         ),
-        home: const ProductsOverviewScreen(),
+        home: const AuthScreen(),
         routes: {
-          ProductDetailScreen.routeName: (ctx) => const ProductDetailScreen(),
           CartScreen.routeName: (ctx) => const CartScreen(),
           OrderScreen.routeName: (ctx) => const OrderScreen(),
+          ProductsOverviewScreen.routName: (ctx) => const ProductsOverviewScreen(),
+          ProductDetailScreen.routeName: (ctx) => const ProductDetailScreen(),
           AdminProductScreen.routeName: (ctx) => const AdminProductScreen(),
-          AdminProductEditScreen.routeName: (ctx) =>
-              const AdminProductEditScreen(),
+          AdminProductEditScreen.routeName: (ctx) => const AdminProductEditScreen(),
         },
       ),
     );
