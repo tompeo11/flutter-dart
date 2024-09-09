@@ -6,11 +6,12 @@ class CartItem {
   final int quantity;
   final double unitPrice;
 
-  CartItem(
-      {required this.productId,
-      required this.name,
-      required this.quantity,
-      required this.unitPrice});
+  CartItem({
+    required this.productId,
+    required this.name,
+    required this.quantity,
+    required this.unitPrice
+  });
 }
 
 class Cart with ChangeNotifier {

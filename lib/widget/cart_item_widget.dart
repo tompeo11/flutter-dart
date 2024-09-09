@@ -70,7 +70,8 @@ class CartItemWidget extends StatelessWidget {
             title: Text(name),
             subtitle:
                 Text('Total: \$ ${(unitPrice * quantity).toStringAsFixed(2)}'),
-            trailing: Text('x $quantity'),
+            trailing:
+            Text('x $quantity'),
           ),
         ),
       ),

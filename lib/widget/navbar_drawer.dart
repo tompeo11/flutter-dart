@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/provider/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../screen/admin_product_screen.dart';
 import '../screen/order_screen.dart';
@@ -34,6 +36,16 @@ class NavbarDrawer extends StatelessWidget {
             onTap: () => Navigator.of(context)
                 .pushReplacementNamed(AdminProductScreen.routeName),
           ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Logout'),
+            onTap: () => {
+              Navigator.of(context).pop(),
+              context.read<AuthProvider>().logout(),
+            }
+          ),
+          const Divider(),
         ],
       ),
     );
